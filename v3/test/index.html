@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b5ed7" />
+  <meta name="description" content="CyntIA v3 - Chat Multi-Personalidad con IA especializada" />
+  
+  <title>CyntIA V3 - Multi Personalidad</title>
+  
+  <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
+</head>
+<body>
+
+<div class="layout">
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <button id="darkModeBtn" class="dark-mode-btn" title="Alternar modo oscuro">
+        🌙
+      </button>
+    </div>
+    
+    <div class="sidebar-content">
+      <!-- SELECTOR DE PERSONALIDAD -->
+      <div class="personality-selector">
+        <label>👤 Personalidad</label>
+        <select id="personalitySelect" class="select-personality">
+          <option value="general">🤖 Asistente General</option>
+          <option value="cocinero">👨‍🍳 Chef Gastón</option>
+          <option value="ingles">👩‍🏫 Teacher Emma</option>
+          <option value="matematicas">🧮 Profe Matías</option>
+          <option value="fisica">⚛️ Dr. Físico</option>
+          <option value="trainer">💪 Coach Fit</option>
+          <option value="espiritual">🧘 Guía Luz</option>
+        </select>
+      </div>
+
+      <!-- SELECTOR DE NIVEL -->
+      <div class="level-selector">
+        <label>📊 Nivel</label>
+        <select id="levelSelect" class="select-level">
+          <option value="principiante">🌱 Principiante</option>
+          <option value="intermedio" selected>⭐ Intermedio</option>
+          <option value="avanzado">🚀 Avanzado</option>
+        </select>
+      </div>
+
+      <button id="newConversationBtn" class="btn-new-conversation">➕ Nueva Conversación</button>
+      
+      <ul id="conversationList"></ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <button id="renameBtn" class="btn-action" title="Renombrar conversación">
+        ✏️ Renombrar
+      </button>
+      <button id="deleteBtn" class="btn-action btn-danger" title="Eliminar conversación">
+        🗑️ Eliminar
+      </button>
+      <button id="exportBtn" class="btn-action" title="Exportar conversación">
+        💾 Exportar
+      </button>
+    </div>
+  </aside>
+
+  <!-- CHAT CONTAINER -->
+  <main class="chat-container">
+    <header class="chat-header">
+      <div class="header-left">
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
+          ☰
+        </button>
+        <div class="personality-avatar" id="currentAvatar">🤖</div>
+        <div>
+          <h1 id="currentPersonalityName">Asistente General</h1>
+          <span class="subtitle" id="currentLevel">Nivel: Intermedio</span>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <a href="../index.html" class="home-link" title="Volver al inicio">
+          🏠 Home
+        </a>
+      </div>
+    </header>
+
+    <div id="messages" class="messages"></div>
+
+    <div id="typingIndicator" class="typing-indicator hidden">
+      <div class="personality-avatar-small" id="typingAvatar">🤖</div>
+      <div class="typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+    <form id="form" class="chat-input">
+      <input 
+        id="input" 
+        placeholder="Escribe un mensaje…" 
+        autocomplete="off" 
+        disabled
+      />
+      <button type="submit" disabled>Enviar</button>
+    </form>
+
+    <footer class="chat-footer">
+      <a href="../index.html" class="home-link">🏠 Inicio</a> ·
+      <br>
+      Creado por <strong><a href="https://bit.ly/45BE8TF" target="_blank">Lalita635</a></strong> ·
+      <span class="version">v3.0 Multi-Personalidad</span>
+    </footer>
+  </main>
+</div>
+
+<!-- Modal para renombrar -->
+<div id="renameModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Renombrar conversación</h2>
+    <input type="text" id="renameInput" placeholder="Nuevo título..." />
+    <div class="modal-buttons">
+      <button id="renameCancelBtn" class="btn-cancel">Cancelar</button>
+      <button id="renameConfirmBtn" class="btn-confirm">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para confirmar eliminación -->
+<div id="deleteModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>⚠️ Eliminar conversación</h2>
+    <p>¿Estás seguro de que quieres eliminar esta conversación? No se puede deshacer.</p>
+    <div class="modal-buttons">
+      <button id="deleteCancelBtn" class="btn-cancel">Cancelar</button>
+      <button id="deleteConfirmBtn" class="btn-confirm btn-danger">Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Detectar si la página está dentro de un iframe y ocultar el footer
+  if (window.self !== window.top) {
+    document.addEventListener('DOMContentLoaded', () => {
+      const footer = document.querySelector('.chat-footer');
+      if (footer) {
+        footer.style.display = 'none';
+      }
+    });
+  }
+  
+  // Registrar Service Worker para PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(err => {
+      console.log('Service Worker no registrado:', err);
+    });
+  }
+</script>
+<script src="app.js"></script>
+</body>
+</html>

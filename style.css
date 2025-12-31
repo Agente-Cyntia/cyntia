@@ -336,6 +336,101 @@ section h2 {
   margin-bottom: 25px;
 }
 
+/* ============= COMING SOON ============= */
+.coming-soon-section {
+  background: linear-gradient(135deg, rgba(76, 175, 80, 0.1) 0%, rgba(76, 175, 80, 0.05) 100%);
+  border: 2px dashed #4CAF50;
+  border-radius: 12px;
+}
+
+.coming-soon-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.coming-soon-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 30px;
+  border-left: 5px solid #4CAF50;
+}
+
+.coming-soon-box h3 {
+  color: var(--primary);
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.coming-soon-box p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.coming-soon-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ============= NEWSLETTER ============= */
+.newsletter-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  text-align: center;
+  border-radius: 12px;
+}
+
+.newsletter-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.newsletter-content p:first-of-type {
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.newsletter-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.newsletter-form input {
+  flex: 1;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: white;
+  color: var(--text);
+}
+
+.newsletter-form input::placeholder {
+  color: #999;
+}
+
+.newsletter-form input:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.newsletter-form .btn {
+  padding: 12px 30px;
+  background: white;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.newsletter-form .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
 /* ============= CHANGELOG ============= */
 .changelog-section {
   background: white;
@@ -480,6 +575,22 @@ section h2 {
 
   .features-grid {
     grid-template-columns: 1fr;
+  }
+
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-form .btn {
+    flex-shrink: 1;
+  }
+
+  .coming-soon-buttons {
+    flex-direction: column;
+  }
+
+  .coming-soon-buttons .btn {
+    width: 100%;
   }
 
   .footer-content {
