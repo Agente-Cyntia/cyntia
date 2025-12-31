@@ -2,48 +2,43 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>CyntIA – Chat</title>
+  <title>CyntIA – Web Chat</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="chat-container">
+<header class="hero">
+  <img src="latest/assets/avatar.png" alt="CyntIA" />
+  <h1>CyntIA</h1>
+  <p>Asistente virtual basado en IA · Web Chat</p>
 
-  <!-- HEADER -->
-  <header class="chat-header">
-    <div class="header-left">
-      <img src="assets/avatar.png" alt="CyntIA" class="avatar">
-      <div>
-        <h1>CyntIA</h1>
-        <span class="subtitle">Asistente virtual</span>
-      </div>
-    </div>
+  <a href="latest/" class="btn-primary">
+    🚀 Ir a la última versión
+  </a>
+</header>
 
-    <div class="header-right">
-      <select id="conversationSelect"></select>
-      <button id="newConversationBtn">＋</button>
-    </div>
-  </header>
+<main class="container">
 
-  <!-- MESSAGES -->
-  <div id="messages"></div>
+  <!-- CHANGELOG -->
+  <section>
+    <h2>📝 Changelog</h2>
+    <div id="changelog"></div>
+  </section>
 
-  <!-- INPUT -->
-  <form id="form" class="chat-input">
-    <input id="input" placeholder="Escribí un mensaje…" autocomplete="off" />
-    <button type="submit">Enviar</button>
-  </form>
+  <!-- VERSIONES -->
+  <section>
+    <h2>🕰️ Versiones anteriores</h2>
+    <ul id="versions"></ul>
+  </section>
 
-  <!-- FOOTER -->
-  <footer class="chat-footer">
-    Creado por <strong>Lalita635</strong> ·
-    <a href="http://bit.ly/45BE8TF" target="_blank">Web</a> ·
-    <a href="http://bit.ly/4fS0yUa" target="_blank">Colaborar</a>
-  </footer>
+</main>
 
-</div>
+<footer>
+  Creado por <strong>Lalita635</strong> ·
+  <a href="https://bit.ly/45BE8TF" target="_blank">Web</a>
+</footer>
 
-<script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

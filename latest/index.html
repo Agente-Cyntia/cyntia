@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>CyntIA – Chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="chat-container">
+
+  <!-- HEADER -->
+  <header class="chat-header">
+    <div class="header-left">
+      <img src="assets/avatar.png" alt="CyntIA" class="avatar">
+      <div>
+        <h1>CyntIA</h1>
+        <span class="subtitle">Asistente virtual</span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <select id="conversationSelect"></select>
+      <button id="newConversationBtn">＋</button>
+    </div>
+  </header>
+
+  <!-- MESSAGES -->
+  <div id="messages"></div>
+
+  <!-- INPUT -->
+  <form id="form" class="chat-input">
+    <input id="input" placeholder="Escribí un mensaje…" autocomplete="off" />
+    <button type="submit">Enviar</button>
+  </form>
+
+  <!-- FOOTER -->
+  <footer class="chat-footer">
+    Creado por <strong>Lalita635</strong> ·
+    <a href="http://bit.ly/45BE8TF" target="_blank">Web</a> ·
+    <a href="http://bit.ly/4fS0yUa" target="_blank">Colaborar</a>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

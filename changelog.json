@@ -1,0 +1,18 @@
+{
+  "latest": "v1.0",
+  "versions": [
+    {
+      "version": "v1.0",
+      "date": "2025-01-02",
+      "status": "stable",
+      "url": "latest/",
+      "changes": [
+        "Chat web funcional conectado a n8n",
+        "Soporte para múltiples conversaciones",
+        "Persistencia en localStorage",
+        "Efecto de escritura del bot",
+        "Deploy inicial en GitHub Pages"
+      ]
+    }
+  ]
+}

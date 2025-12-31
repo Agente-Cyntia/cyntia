@@ -27,13 +27,22 @@ https://agente-cyntia.github.io/cyntia/
 
 ---
 
-## 📁 Estructura del proyecto (v1.0)
+## 🤝 Contribuciones
 
-```text
-/
-├─ index.html
-├─ styles.css
-├─ app.js
-└─ assets/
-   └─ avatar.png
-└── README.md
+Las contribuciones son bienvenidas 🙌
+Podés colaborar desde el siguiente enlace:
+
+## 👉 https://bit.ly/4fS0yUa
+
+---
+
+## 👩‍💻 Autor
+
+Creado por Lalita635
+🌐 Web: https://bit.ly/45BE8TF
+
+---
+
+## 📄 Licencia
+
+Este proyecto se distribuye bajo licencia MIT.
