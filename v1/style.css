@@ -193,14 +193,14 @@ body {
   }
 
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: -260px;
-    height: 100vh;
-    width: 220px;
-    z-index: 30;
-    transition: left 0.3s ease;
-  }
+  position: fixed;
+  top: 60px;
+  left: -260px;
+  height: calc(100vh - 60px);
+  width: 220px;
+  z-index: 30;
+  transition: left 0.3s ease;
+}
 
   .sidebar.open {
     left: 0;
