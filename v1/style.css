@@ -200,16 +200,15 @@ body {
 
   .sidebar {
     position: fixed;
-    top: 0;
+    top: 60px;
     left: -260px;
-    height: 100vh;
+    height: calc(100vh - 60px);
     width: 220px;
     z-index: 30;
     transition: left 0.3s ease;
     display: flex;
     flex-direction: column;
-    padding: 0;
-    padding-top: 60px;
+    padding: 40px;
   }
 
   .sidebar.open {
