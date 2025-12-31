@@ -37,15 +37,22 @@ body {
   border: none;
   color: white;
   cursor: pointer;
+  position: relative;
+  z-index: 40;
+  pointer-events: auto;
 }
 
 .overlay {
   position: fixed;
-  inset: 0;
+  top: 56px; /* altura aproximada del header */
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   display: none;
-  z-index: 5;
+  z-index: 15;
 }
+
 
 
 .sidebar {
@@ -54,6 +61,7 @@ body {
   border-right: 1px solid #ddd;
   padding: 10px;
   overflow-y: auto;
+  z-index: 25;
 }
 
 .sidebar button {
@@ -93,6 +101,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 30;
 }
 
 
@@ -203,7 +213,4 @@ body {
     display: block;
   }
 
-  .layout {
-    flex-direction: column;
-  }
 }

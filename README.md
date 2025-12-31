@@ -30,9 +30,7 @@ https://agente-cyntia.github.io/cyntia/
 ## 🤝 Contribuciones
 
 Las contribuciones son bienvenidas 🙌
-Podés colaborar desde el siguiente enlace:
-
-## 👉 https://bit.ly/4fS0yUa
+Podés colaborar desde el siguiente enlace: 👉 https://bit.ly/4fS0yUa
 
 ---
 
