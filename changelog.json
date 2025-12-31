@@ -1,13 +1,13 @@
 {
-  "latest": "v1.0",
+  "latest": "v1.3",
   "versions": [
     {
-      "version": "v1.0",
-      "date": "2025-01-02",
+      "version": "v1.3",
+      "date": "2025-12-20",
       "status": "stable",
       "url": "v1/",
       "changes": [
-        "Chat web con ia",
+        "Chat web con IA",
         "Soporte para múltiples conversaciones",
         "Persistencia en localStorage",
         "Efecto de escritura del bot",
