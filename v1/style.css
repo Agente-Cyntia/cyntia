@@ -13,6 +13,23 @@ body {
   height: 100vh;
 }
 
+/* BOTON HOME*/
+.home-link {
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+}
+
+.home-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+
+
 /* SIDEBAR */
 .sidebar {
   width: 220px;
@@ -56,7 +73,11 @@ body {
   padding: 10px;
   background: #0b5ed7;
   color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+
 
 .header-left {
   display: flex;
@@ -134,6 +155,15 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
+    .home-link {
+    font-size: 18px;
+    padding: 6px;
+  }
+
+  .home-link::after {
+    content: "";
+  }
+
   .sidebar {
     width: 90px;
   }

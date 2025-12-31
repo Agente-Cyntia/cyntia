@@ -4,33 +4,85 @@
 
 body {
   margin: 0;
-  background: #f4f4f4;
   font-family: Arial, sans-serif;
+  background: #f4f4f4;
 }
 
-.chat-container {
-  max-width: 500px;
+.layout {
+  display: flex;
   height: 100vh;
-  margin: auto;
-  background: white;
-  display: flex;
-  flex-direction: column;
 }
 
-/* HEADER */
-.chat-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* BOTON HOME*/
+.home-link {
+  font-size: 14px;
+  text-decoration: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+}
+
+.home-link:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  background: #f1f3f5;
+  border-right: 1px solid #ddd;
   padding: 10px;
+  overflow-y: auto;
+}
+
+.sidebar button {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.sidebar li.active {
   background: #0b5ed7;
   color: white;
 }
 
+/* CHAT */
+.chat-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: white;
+}
+
+.chat-header {
+  padding: 10px;
+  background: #0b5ed7;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
 .header-left {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 }
 
 .avatar {
@@ -44,19 +96,6 @@ body {
   opacity: 0.85;
 }
 
-.header-right {
-  display: flex;
-  gap: 5px;
-}
-
-.header-right select,
-.header-right button {
-  padding: 5px;
-  border-radius: 4px;
-  border: none;
-}
-
-/* MESSAGES */
 #messages {
   flex: 1;
   padding: 10px;
@@ -92,8 +131,8 @@ body {
 /* INPUT */
 .chat-input {
   display: flex;
-  padding: 10px;
   gap: 6px;
+  padding: 10px;
   border-top: 1px solid #ddd;
 }
 
@@ -102,14 +141,9 @@ body {
   padding: 8px;
 }
 
-.chat-input button {
-  padding: 8px 12px;
-}
-
-/* FOOTER */
 .chat-footer {
-  text-align: center;
   font-size: 12px;
+  text-align: center;
   padding: 6px;
   background: #f0f0f0;
 }
@@ -117,4 +151,24 @@ body {
 .chat-footer a {
   color: #0b5ed7;
   text-decoration: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .home-link {
+    font-size: 18px;
+    padding: 6px;
+  }
+
+  .home-link::after {
+    content: "";
+  }
+
+  .sidebar {
+    width: 90px;
+  }
+
+  .sidebar li {
+    font-size: 12px;
+  }
 }
