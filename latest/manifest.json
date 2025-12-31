@@ -1,7 +1,7 @@
 {
-  "name": "CyntIA v3 - Multi Personalidad IA",
-  "short_name": "CyntIA v3",
-  "description": "Chat Multi-Personalidad con IA especializada - v3.0",
+  "name": "CyntIA - Asistente Virtual IA",
+  "short_name": "CyntIA",
+  "description": "Chat con Inteligencia Artificial - v2.0",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -28,7 +28,7 @@
       "purpose": "maskable"
     }
   ],
-  "categories": ["productivity", "education"],
+  "categories": ["productivity"],
   "shortcuts": [
     {
       "name": "Nuevo Chat",

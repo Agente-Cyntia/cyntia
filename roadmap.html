@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CyntIA v3 - Roadmap 2026</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0b5ed7;
+      --primary-dark: #084298;
+      --primary-light: #3d8bfd;
+      --secondary: #6c757d;
+      --success: #198754;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --light: #f8f9fa;
+      --dark: #212529;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ============= HEADER/HERO ============= */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+      background-size: 50px 50px;
+      animation: float 20s linear infinite;
+    }
+
+    @keyframes float {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(50px, 50px); }
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    header .tagline {
+      font-size: 1.4rem;
+      opacity: 0.95;
+      margin-bottom: 10px;
+    }
+
+    header .version-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+
+    header .date {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* ============= CONTAINER ============= */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ============= SECCION DE INTRO ============= */
+    .intro-section {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      margin: 60px auto;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      max-width: 900px;
+    }
+
+    .intro-section h2 {
+      color: var(--primary);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .intro-section p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+
+    /* ============= CARACTERÍSTICAS PRINCIPALES ============= */
+    .features-main {
+      margin: 60px auto;
+      max-width: 1000px;
+    }
+
+    .features-main h2 {
+      color: white;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    .main-feature {
+      background: white;
+      border-radius: 12px;
+      padding: 40px;
+      margin-bottom: 30px;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .main-feature:nth-child(even) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .main-feature:nth-child(even) .feature-content {
+      order: 2;
+    }
+
+    .main-feature:nth-child(even) .feature-icon {
+      order: 1;
+    }
+
+    .feature-icon {
+      font-size: 120px;
+      text-align: center;
+      filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.1));
+    }
+
+    .feature-content h3 {
+      color: var(--primary);
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+    }
+
+    .feature-content p {
+      color: #666;
+      font-size: 1.05rem;
+      margin-bottom: 15px;
+      line-height: 1.8;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin: 20px 0;
+    }
+
+    .feature-list li {
+      padding: 10px 0;
+      padding-left: 30px;
+      position: relative;
+      color: #666;
+    }
+
+    .feature-list li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--success);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    /* ============= TIMELINE ============= */
+    .timeline-section {
+      margin: 80px auto;
+      max-width: 1000px;
+    }
+
+    .timeline-section h2 {
+      color: white;
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .timeline {
+      position: relative;
+      padding: 20px 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+    }
+
+    .timeline-item {
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .timeline-item:nth-child(odd) {
+      margin-left: 0;
+      margin-right: 50%;
+      text-align: right;
+      padding-right: 40px;
+    }
+
+    .timeline-item:nth-child(even) {
+      margin-left: 50%;
+      margin-right: 0;
+      text-align: left;
+      padding-left: 40px;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 20px;
+      height: 20px;
+      background: var(--primary);
+      border: 4px solid white;
+      border-radius: 50%;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 0 0 4px var(--primary-light);
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .timeline-content h3 {
+      color: var(--primary);
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+    }
+
+    .timeline-date {
+      color: var(--secondary);
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    .timeline-content p {
+      color: #666;
+      line-height: 1.7;
+    }
+
+    /* ============= GRID DE FEATURES ============= */
+    .features-grid {
+      margin: 60px auto;
+      max-width: 1000px;
+    }
+
+    .features-grid h2 {
+      color: white;
+      font-size: 2.2rem;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      border-top: 4px solid var(--primary);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .feature-card .icon {
+      font-size: 60px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: #666;
+      font-size: 0.95rem;
+    }
+
+    /* ============= NEWSLETTER SECTION ============= */
+    .newsletter-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      border-radius: 12px;
+      margin: 60px auto;
+      max-width: 900px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .newsletter-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .newsletter-content {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .newsletter-content p:first-of-type {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      background: white;
+      color: var(--text);
+    }
+
+    .newsletter-form input::placeholder {
+      color: #999;
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    .newsletter-form button {
+      padding: 12px 30px;
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+
+    .newsletter-form button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .newsletter-content p:last-of-type {
+      font-size: 0.85rem;
+      opacity: 0.9;
+    }
+
+    /* ============= CTA SECTION ============= */
+    .cta-section {
+      background: linear-gradient(135deg, #4CAF50 0%, #388E3C 100%);
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      border-radius: 12px;
+      margin: 60px auto;
+      max-width: 900px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+    }
+
+    .cta-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    .cta-section p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+      opacity: 0.95;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 32px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-cta {
+      background: white;
+      color: #4CAF50;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    /* ============= FOOTER ============= */
+    footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 80px;
+    }
+
+    footer p {
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ============= RESPONSIVE ============= */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+
+      header .tagline {
+        font-size: 1.1rem;
+      }
+
+      .main-feature {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .main-feature:nth-child(even) .feature-content {
+        order: 1;
+      }
+
+      .main-feature:nth-child(even) .feature-icon {
+        order: 2;
+      }
+
+      .timeline::before {
+        left: 0;
+      }
+
+      .timeline-item:nth-child(odd),
+      .timeline-item:nth-child(even) {
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        padding-left: 50px;
+        padding-right: 0;
+      }
+
+      .timeline-dot {
+        left: 0;
+        transform: translateX(-50%);
+      }
+
+      .intro-section,
+      .features-main,
+      .timeline-section,
+      .features-grid,
+      .newsletter-section,
+      .cta-section {
+        padding: 20px;
+        margin: 40px auto;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .newsletter-form button {
+        flex-shrink: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-content">
+    <div class="version-badge">🚀 Coming Soon</div>
+    <h1>CyntIA v3</h1>
+    <p class="tagline">Múltiples Personalidades, Infinitas Posibilidades</p>
+    <p class="date">📅 Febrero 2026</p>
+  </div>
+</header>
+
+<!-- INTRO -->
+<div class="container">
+  <section class="intro-section">
+    <h2>¿Qué es CyntIA v3?</h2>
+    <p>
+      La próxima generación de CyntIA trae un cambio revolucionario: <strong>múltiples personalidades especializadas</strong>. 
+      Un único chat que se adapta a tus necesidades, con expertos en diferentes áreas listos para ayudarte.
+    </p>
+    <p>
+      Elige el asistente que necesitas en cada momento y obtén respuestas precisas, personalizadas y contextualizadas 
+      según tu situación.
+    </p>
+  </section>
+
+  <!-- FEATURES PRINCIPALES -->
+  <section class="features-main">
+    <h2>Características Principales</h2>
+
+    <div class="main-feature">
+      <div class="feature-icon">🎭</div>
+      <div class="feature-content">
+        <h3>Personalidades Especializadas</h3>
+        <p>Cada personalidad es un experto en su campo. Cambia entre ellas según lo necesites:</p>
+        <ul class="feature-list">
+          <li><strong>Profesor de Matemáticas:</strong> Resuelve problemas y explica conceptos</li>
+          <li><strong>Chef Gourmet:</strong> Recetas, técnicas culinarias y menú planning</li>
+          <li><strong>Coach Fitness:</strong> Entrenamientos personalizados y nutrición</li>
+          <li><strong>Tutor de Idiomas:</strong> Aprende nuevos idiomas con interactividad</li>
+          <li><strong>Y muchas más...</strong> Abogado, Psicólogo, Programador, etc.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="main-feature">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-content">
+        <h3>Cambio Dinámico de Contexto</h3>
+        <p>
+          No necesitas nuevas conversaciones para cambiar de especialista. La IA mantiene el contexto 
+          y adapta su respuesta según la personalidad seleccionada.
+        </p>
+        <p style="color: #999; font-size: 0.95rem;">
+          Ejemplo: Pregunta sobre nutrición al Coach, luego cambia al Profesor para entender la química 
+          de los alimentos, todo en la misma conversación.
+        </p>
+      </div>
+    </div>
+
+    <div class="main-feature">
+      <div class="feature-icon">⚙️</div>
+      <div class="feature-content">
+        <h3>Personalización Avanzada</h3>
+        <p>Configura cada personalidad según tus preferencias:</p>
+        <ul class="feature-list">
+          <li>Nivel de detalle (básico, intermedio, avanzado)</li>
+          <li>Idioma y tono de comunicación</li>
+          <li>Especialidades específicas</li>
+          <li>Preferencias de formato (código, recetas, planes, etc.)</li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- CARACTERÍSTICAS ADICIONALES -->
+  <section class="features-grid">
+    <h2>Más Mejoras en v3</h2>
+    <div class="grid">
+      <div class="feature-card">
+        <div class="icon">🎯</div>
+        <h3>Modo Colaborativo</h3>
+        <p>Obtén consejos simultáneos de múltiples personalidades sobre el mismo tema.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🌍</div>
+        <h3>Personalidades Globales</h3>
+        <p>Acceso a expertos en diferentes idiomas y culturas.</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🤝</div>
+        <h3>Compartir Conversaciones</h3>
+        <p>Comparte tus diálogos con otros usuarios y aprende juntos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <h2>Hoja de Ruta</h2>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Fase 1: Fundamentos</h3>
+          <div class="timeline-date">Diciembre 2025</div>
+          <p>Preparación de la infraestructura. Diseño e integración de las primeras personalidades especializadas.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Fase 2: Alpha Testing</h3>
+          <div class="timeline-date">Enero 2026</div>
+          <p>Pruebas internas con usuarios beta. Refinamiento de personalidades y manejo de errores.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Fase 3: Lanzamiento v3</h3>
+          <div class="timeline-date">Febrero 2026</div>
+          <p>Lanzamiento oficial con 5+ personalidades. Disponible en web y como PWA instalable.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">
+          <h3>Fase 4: Expansión</h3>
+          <div class="timeline-date">Marzo 2026</div>
+          <p>Nuevas personalidades, mejoras de rendimiento, modo colaborativo y características premium.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <h2>📧 Newsletter</h2>
+    <div class="newsletter-content">
+      <p>Suscríbete para recibir actualizaciones exclusivas sobre CyntIA, nuevas personalidades y características antes del lanzamiento.</p>
+      <form action="https://formspree.io/f/mgoveapq" method="POST" class="newsletter-form">
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="tu@email.com" 
+          required 
+          aria-label="Tu email"
+        />
+        <button type="submit">Suscribirse</button>
+      </form>
+      <p>✓ Sin spam · ✓ Puedes desuscribirte en cualquier momento · ✓ Respetamos tu privacidad</p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <h2>¿Listo para el futuro?</h2>
+    <p>CyntIA v3 está en desarrollo. Sé de los primeros en probar esta revolución.</p>
+    <div class="cta-buttons">
+      <a href="beta.html" class="btn btn-cta">Prueba la Versión Actual</a>
+      <a href="index.html" class="btn btn-secondary">Volver al Inicio</a>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>CyntIA v3 Roadmap - Febrero 2026</p>
+  <p>Creado por <strong><a href="https://bit.ly/45BE8TF" target="_blank">Lalita635</a></strong></p>
+  <p>&copy; 2025 CyntIA. Licencia MIT.</p>
+</footer>
+
+</body>
+</html>

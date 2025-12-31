@@ -2,9 +2,24 @@
   "latest": "v2.3",
   "versions": [
     {
-      "version": "v2.0",
-      "date": "2025-12-31",
+      "version": "v3.0",
+      "date": "2026-01-01",
       "status": "beta",
+      "url": "v3.html",
+      "changes": [
+        "🎭 Múltiples personalidades especializadas (Profesor, Chef, Coach, Tutor, y más)",
+        "🔄 Cambio dinámico de contexto entre personalidades",
+        "⚙️ Personalización avanzada por especialidad",
+        "🎯 Modo colaborativo con múltiples expertos",
+        "🌍 Personalidades en diferentes idiomas y culturas",
+        "🤝 Compartir conversaciones con otros usuarios",
+        "✨ Interfaz mejorada y más personalizable"
+      ]
+    },
+    {
+      "version": "v2.3",
+      "date": "2025-12-31",
+      "status": "stable",
       "url": "v2/",
       "changes": [
         "🌙 Modo oscuro para una experiencia más cómoda",

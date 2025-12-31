@@ -1,10 +1,11 @@
-const CACHE_NAME = 'cyntia-v3-multi-1';
+const CACHE_NAME = 'cyntia-v2-1';
 const urlsToCache = [
   './',
   './index.html',
   './style.css',
   './app.js',
   './manifest.json',
+  './assets/avatar.png',
   './assets/icon-192.png',
   './assets/icon-512.png'
 ];
@@ -13,7 +14,7 @@ const urlsToCache = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      console.log('Cache abierto - CyntIA v3');
+      console.log('Cache abierto');
       return cache.addAll(urlsToCache).catch(err => {
         console.warn('Algunos archivos no pudieron ser cacheados:', err);
       });
@@ -29,7 +30,6 @@ self.addEventListener('activate', event => {
       return Promise.all(
         cacheNames.map(cacheName => {
           if (cacheName !== CACHE_NAME) {
-            console.log('Eliminando cache antigua:', cacheName);
             return caches.delete(cacheName);
           }
         })
@@ -47,18 +47,10 @@ self.addEventListener('fetch', event => {
   }
 
   // No cachear requests a webhooks o APIs externas
-  if (event.request.url.includes('n8n') || 
-      event.request.url.includes('webhook') || 
-      event.request.url.includes('api')) {
+  if (event.request.url.includes('n8n') || event.request.url.includes('api')) {
     event.respondWith(
       fetch(event.request).catch(() => {
-        return new Response(JSON.stringify({
-          error: 'Sin conexión',
-          reply: 'No hay conexión a internet. Por favor verifica tu conexión.'
-        }), {
-          status: 503,
-          headers: { 'Content-Type': 'application/json' }
-        });
+        return caches.match(event.request);
       })
     );
     return;

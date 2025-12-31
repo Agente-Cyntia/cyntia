@@ -1,4 +1,21 @@
-const webhookUrl = "https://n8n-free-fzir.onrender.com/webhook/webchat-ai";
+const webhookUrl = "https://n8n-free-fzir.onrender.com/webhook/multi-agent-chat";
+
+// Definición de personalidades
+const PERSONALITIES = {
+  general: { name: "Asistente General", icon: "🤖" },
+  cocinero: { name: "Chef Gastón", icon: "👨‍🍳" },
+  ingles: { name: "Teacher Emma", icon: "👩‍🏫" },
+  matematicas: { name: "Profe Matías", icon: "🧮" },
+  fisica: { name: "Dr. Físico", icon: "⚛️" },
+  trainer: { name: "Coach Fit", icon: "💪" },
+  espiritual: { name: "Guía Luz", icon: "🧘" }
+};
+
+const LEVELS = {
+  principiante: "🌱 Principiante",
+  intermedio: "⭐ Intermedio",
+  avanzado: "🚀 Avanzado"
+};
 
 // DOM Elements
 const messagesDiv = document.getElementById("messages");
@@ -15,6 +32,14 @@ const renameBtn = document.getElementById("renameBtn");
 const deleteBtn = document.getElementById("deleteBtn");
 const typingIndicator = document.getElementById("typingIndicator");
 
+// Selectores de personalidad y nivel
+const personalitySelect = document.getElementById("personalitySelect");
+const levelSelect = document.getElementById("levelSelect");
+const currentAvatar = document.getElementById("currentAvatar");
+const currentPersonalityName = document.getElementById("currentPersonalityName");
+const currentLevel = document.getElementById("currentLevel");
+const typingAvatar = document.getElementById("typingAvatar");
+
 // Modales
 const renameModal = document.getElementById("renameModal");
 const deleteModal = document.getElementById("deleteModal");
@@ -25,21 +50,27 @@ const deleteCancelBtn = document.getElementById("deleteCancelBtn");
 const deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
 
 // State
-let state = JSON.parse(localStorage.getItem("cyntia-chat")) || {
+let state = JSON.parse(localStorage.getItem("cyntia-multi-chat")) || {
   conversations: {},
   active: null,
-  darkMode: localStorage.getItem("cyntia-dark-mode") === "true"
+  darkMode: localStorage.getItem("cyntia-dark-mode") === "true",
+  currentPersonality: "general",
+  currentLevel: "intermedio"
 };
 
-// Initialize dark mode
+// Initialize
 if (state.darkMode) {
   document.body.classList.add("dark-mode");
   updateDarkModeButton();
 }
 
+personalitySelect.value = state.currentPersonality;
+levelSelect.value = state.currentLevel;
+updateHeader();
+
 // Save state to localStorage
 function saveState() {
-  localStorage.setItem("cyntia-chat", JSON.stringify(state));
+  localStorage.setItem("cyntia-multi-chat", JSON.stringify(state));
   localStorage.setItem("cyntia-dark-mode", state.darkMode.toString());
 }
 
@@ -57,13 +88,40 @@ function updateDarkModeButton() {
 
 darkModeBtn.addEventListener("click", toggleDarkMode);
 
+// ============= PERSONALITY & LEVEL =============
+function updateHeader() {
+  const personality = PERSONALITIES[state.currentPersonality];
+  const level = state.currentLevel;
+  
+  currentAvatar.textContent = personality.icon;
+  currentPersonalityName.textContent = personality.name;
+  currentLevel.textContent = `Nivel: ${level.charAt(0).toUpperCase() + level.slice(1)}`;
+  typingAvatar.textContent = personality.icon;
+}
+
+personalitySelect.addEventListener("change", (e) => {
+  state.currentPersonality = e.target.value;
+  updateHeader();
+  saveState();
+});
+
+levelSelect.addEventListener("change", (e) => {
+  state.currentLevel = e.target.value;
+  updateHeader();
+  saveState();
+});
+
 // ============= CONVERSATIONS =============
 function createConversation() {
   const id = "conv-" + Date.now();
+  const personality = PERSONALITIES[state.currentPersonality];
+  
   state.conversations[id] = {
-    title: "Nueva conversación",
+    title: `${personality.icon} Nueva conversación`,
     memory: [],
-    createdAt: new Date().toISOString()
+    createdAt: new Date().toISOString(),
+    personality: state.currentPersonality,
+    level: state.currentLevel
   };
   state.active = id;
   saveState();
@@ -77,11 +135,26 @@ function renderConversations() {
   list.innerHTML = "";
   Object.entries(state.conversations).forEach(([id, conv]) => {
     const li = document.createElement("li");
-    li.textContent = conv.title;
     if (id === state.active) li.classList.add("active");
+
+    const icon = document.createElement("span");
+    icon.className = "conversation-icon";
+    icon.textContent = PERSONALITIES[conv.personality]?.icon || "💬";
+
+    const text = document.createElement("span");
+    text.className = "conversation-text";
+    text.textContent = conv.title;
+
+    li.appendChild(icon);
+    li.appendChild(text);
 
     li.addEventListener("click", () => {
       state.active = id;
+      state.currentPersonality = conv.personality;
+      state.currentLevel = conv.level;
+      personalitySelect.value = conv.personality;
+      levelSelect.value = conv.level;
+      updateHeader();
       saveState();
       renderConversations();
       renderMessages();
@@ -100,8 +173,11 @@ function renderMessages() {
   if (!conv) return;
 
   conv.memory.forEach(m => {
-    if (m.role === "user") addMessage(m.content, "user");
-    else addBotMessage(m.content);
+    if (m.role === "user") {
+      addMessage(m.content, "user");
+    } else {
+      addBotMessage(m.content, PERSONALITIES[conv.personality]?.icon || "🤖");
+    }
   });
 }
 
@@ -113,16 +189,17 @@ function addMessage(text, cls) {
   messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 
-function addBotMessage(text) {
+function addBotMessage(text, icon) {
   const div = document.createElement("div");
   div.className = "msg bot";
 
-  const img = document.createElement("img");
-  img.src = "assets/avatar.png";
+  const avatar = document.createElement("div");
+  avatar.className = "bot-avatar";
+  avatar.textContent = icon;
 
   const span = document.createElement("span");
 
-  div.appendChild(img);
+  div.appendChild(avatar);
   div.appendChild(span);
   messagesDiv.appendChild(div);
 
@@ -158,8 +235,10 @@ form.addEventListener("submit", async e => {
   input.value = "";
   disableInput();
 
+  // Actualizar título si es el primer mensaje
   if (conv.memory.length === 1) {
-    conv.title = text.slice(0, 30);
+    const personality = PERSONALITIES[conv.personality];
+    conv.title = `${personality.icon} ${text.slice(0, 25)}`;
     renderConversations();
   }
 
@@ -171,7 +250,9 @@ form.addEventListener("submit", async e => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         message: text,
-        memory: conv.memory.slice(-6)
+        personality: conv.personality,
+        level: conv.level,
+        memory: conv.memory.slice(-10)
       })
     });
 
@@ -180,14 +261,14 @@ form.addEventListener("submit", async e => {
 
     if (data.reply) {
       conv.memory.push({ role: "assistant", content: data.reply });
-      addBotMessage(data.reply);
+      addBotMessage(data.reply, PERSONALITIES[conv.personality]?.icon || "🤖");
     } else {
-      addBotMessage("No se recibió respuesta del agente. Intenta de nuevo.");
+      addBotMessage("No se recibió respuesta del agente. Intenta de nuevo.", "⚠️");
     }
   } catch (error) {
     hideTypingIndicator();
     console.error("Error:", error);
-    addBotMessage("Error de conexión. Verifica tu internet e intenta de nuevo.");
+    addBotMessage("Error de conexión. Verifica tu internet e intenta de nuevo.", "⚠️");
   }
 
   saveState();
@@ -211,8 +292,11 @@ exportBtn.addEventListener("click", () => {
   const conv = state.conversations[state.active];
   if (!conv) return;
 
+  const personality = PERSONALITIES[conv.personality];
   const data = {
     title: conv.title,
+    personality: personality.name,
+    level: conv.level,
     createdAt: conv.createdAt,
     messages: conv.memory
   };
@@ -252,7 +336,6 @@ renameConfirmBtn.addEventListener("click", (e) => {
     state.conversations[state.active].title = newTitle;
     saveState();
     renderConversations();
-    renderMessages();
     renameModal.classList.add("hidden");
     renameInput.value = "";
   }
@@ -270,6 +353,9 @@ renameInput.addEventListener("keypress", (e) => {
     e.preventDefault();
     renameConfirmBtn.click();
   }
+});
+
+renameInput.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     e.preventDefault();
     renameCancelBtn.click();
@@ -294,6 +380,12 @@ deleteConfirmBtn.addEventListener("click", (e) => {
   const remaining = Object.keys(state.conversations);
   if (remaining.length > 0) {
     state.active = remaining[0];
+    const conv = state.conversations[state.active];
+    state.currentPersonality = conv.personality;
+    state.currentLevel = conv.level;
+    personalitySelect.value = conv.personality;
+    levelSelect.value = conv.level;
+    updateHeader();
   } else {
     createConversation();
     deleteModal.classList.add("hidden");
@@ -336,6 +428,14 @@ if (!state.conversations || Object.keys(state.conversations).length === 0) {
   createConversation();
 } else {
   state.active ||= Object.keys(state.conversations)[0];
+  const conv = state.conversations[state.active];
+  if (conv) {
+    state.currentPersonality = conv.personality;
+    state.currentLevel = conv.level;
+    personalitySelect.value = conv.personality;
+    levelSelect.value = conv.level;
+    updateHeader();
+  }
   renderConversations();
   renderMessages();
   enableInput();
