@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>CyntIA Beta – Prueba las últimas características de CyntIA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0b5ed7;
+      --primary-dark: #084298;
+      --primary-light: #3d8bfd;
+      --danger: #dc3545;
+      --warning: #ffc107;
+      --light: #f8f9fa;
+      --gray: #e9ecef;
+      --text: #212529;
+      --text-light: #6c757d;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ============= HEADER ============= */
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      padding: 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .header-left img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .header-left h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+
+    .header-left .beta-label {
+      background: rgba(255, 193, 7, 0.3);
+      color: #fff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 193, 7, 0.6);
+    }
+
+    .header-right a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.15);
+      transition: background 0.3s ease;
+    }
+
+    .header-right a:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+
+    /* ============= CONTENEDOR PRINCIPAL ============= */
+    .beta-hero {
+      background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(220, 53, 69, 0.05) 100%);
+      border-bottom: 2px solid var(--warning);
+      padding: 30px 20px;
+      margin-bottom: 40px;
+    }
+
+    .beta-hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .warning-box {
+      background: white;
+      border-left: 5px solid var(--warning);
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+      display: flex;
+      gap: 15px;
+      align-items: flex-start;
+    }
+
+    .warning-icon {
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .warning-content h2 {
+      margin: 0 0 10px 0;
+      color: var(--primary);
+      font-size: 1.3rem;
+    }
+
+    .warning-content p {
+      margin: 8px 0;
+      color: var(--text-light);
+    }
+
+    .warning-content ul {
+      margin: 15px 0 0 20px;
+      color: var(--text-light);
+    }
+
+    .warning-content li {
+      margin-bottom: 8px;
+    }
+
+    /* ============= CONTENEDOR PRINCIPAL ============= */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ============= SECCION DE CHAT ============= */
+    .chat-section {
+      margin-bottom: 40px;
+    }
+
+    .chat-section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .chat-wrapper {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      border: 1px solid var(--gray);
+    }
+
+    .chat-iframe-container {
+      width: 100%;
+      height: 600px;
+      position: relative;
+    }
+
+    .chat-iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 768px) {
+      .chat-iframe-container {
+        height: 500px;
+      }
+    }
+
+    /* ============= SECCION DE REPORTES ============= */
+    .report-section {
+      background: white;
+      border-radius: 12px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      margin-bottom: 40px;
+      border-top: 3px solid var(--danger);
+    }
+
+    .report-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
+      color: var(--primary);
+    }
+
+    .report-section p {
+      color: var(--text-light);
+      margin-bottom: 25px;
+      font-size: 1.05rem;
+    }
+
+    .report-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .btn-danger {
+      background: var(--danger);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background: #c82333;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(220, 53, 69, 0.3);
+    }
+
+    .btn-secondary {
+      background: var(--gray);
+      color: var(--text);
+      border: 2px solid var(--text-light);
+    }
+
+    .btn-secondary:hover {
+      background: var(--text-light);
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    /* ============= INFORMACION ============= */
+    .info-section {
+      background: linear-gradient(135deg, var(--light) 0%, white 100%);
+      border-radius: 12px;
+      padding: 40px 30px;
+      margin-bottom: 40px;
+      border: 1px solid var(--gray);
+    }
+
+    .info-section h2 {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .info-card {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .info-card h3 {
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+
+    .info-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+    }
+
+    /* ============= FOOTER ============= */
+    footer {
+      background: var(--text);
+      color: white;
+      padding: 40px 20px 20px;
+      margin-top: 60px;
+      text-align: center;
+    }
+
+    footer p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 10px;
+    }
+
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* ============= RESPONSIVE ============= */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .warning-box {
+        flex-direction: column;
+      }
+
+      .warning-icon {
+        font-size: 1.5rem;
+      }
+
+      .report-buttons {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .report-section {
+        padding: 25px;
+      }
+
+      .info-section {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-content">
+    <div class="header-left">
+      <img src="latest/assets/avatar.png" alt="CyntIA" />
+      <div>
+        <h1>CyntIA</h1>
+        <span class="beta-label">🧪 VERSIÓN BETA</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="index.html">← Volver al inicio</a>
+    </div>
+  </div>
+</header>
+
+<!-- ADVERTENCIA BETA -->
+<section class="beta-hero">
+  <div class="beta-hero-content">
+    <div class="warning-box">
+      <div class="warning-icon">⚠️</div>
+      <div class="warning-content">
+        <h2>Bienvenido a la versión Beta</h2>
+        <p><strong>Esta es una versión de prueba en desarrollo.</strong> El agente aún no está completamente terminado y es posible que encuentres algunos problemas o comportamientos inesperados.</p>
+        <p><strong>Tu feedback es valioso:</strong> Si encuentras algún error o problema, por favor repórtalo para ayudarnos a mejorar.</p>
+        <p><strong>Ten en cuenta:</strong></p>
+        <ul>
+          <li>Algunas funciones pueden no funcionar como se espera</li>
+          <li>El rendimiento puede variar</li>
+          <li>Los datos pueden no persistir en futuras actualizaciones</li>
+          <li>La disponibilidad no está garantizada</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECCION DE CHAT -->
+<main class="container">
+  <section class="chat-section">
+    <h2>💬 Chat Beta</h2>
+    <div class="chat-wrapper">
+      <div class="chat-iframe-container">
+        <iframe src="beta/index.html" title="CyntIA Chat Beta"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECCION DE REPORTES -->
+  <section class="report-section">
+    <h2>🐛 ¿Encontraste un problema?</h2>
+    <p>Ayúdanos a mejorar reportando errores y sugerencias. Todas las reportes son importantes para el desarrollo de CyntIA.</p>
+    <div class="report-buttons">
+      <a href="https://github.com/agente-cyntia/cyntia/issues/new?labels=beta&title=%5BBeta%5D+" target="_blank" class="btn btn-danger">
+        📋 Reportar Error
+      </a>
+      <a href="index.html" class="btn btn-secondary">
+        ← Volver al inicio
+      </a>
+    </div>
+  </section>
+
+  <!-- INFORMACION -->
+  <section class="info-section">
+    <h2>ℹ️ Información sobre la Beta</h2>
+    <div class="info-grid">
+      <div class="info-card">
+        <h3>🎯 Objetivo</h3>
+        <p>Probar nuevas características y funcionalidades antes de su lanzamiento oficial en versiones estables.</p>
+      </div>
+      <div class="info-card">
+        <h3>🔄 Actualizaciones</h3>
+        <p>Esta versión se actualiza frecuentemente con nuevas características y correcciones de bugs.</p>
+      </div>
+      <div class="info-card">
+        <h3>💬 Feedback</h3>
+        <p>Tu opinión y reportes de errores son cruciales para mejorar la calidad del producto.</p>
+      </div>
+      <div class="info-card">
+        <h3>🚀 Próximas características</h3>
+        <p>En beta puedes probar funciones que aún están en desarrollo y que llegarán a la versión estable.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>CyntIA Beta - Versión de prueba</p>
+  <p>Creado por <a href="https://bit.ly/45BE8TF" target="_blank"><strong>Lalita635</strong></a> · 
+    <a href="https://github.com/agente-cyntia/cyntia/issues/new?labels=beta&title=%5BBeta%5D+" target="_blank">Reportar Error</a>
+  </p>
+  <p>&copy; 2025 CyntIA. Licencia MIT.</p>
+</footer>
+
+</body>
+</html>
