@@ -3,7 +3,7 @@ const webhookUrl = "https://n8n-free-fzir.onrender.com/webhook/webchat-ai";
 const messagesDiv = document.getElementById("messages");
 const form = document.getElementById("form");
 const input = document.getElementById("input");
-const select = document.getElementById("conversationSelect");
+const list = document.getElementById("conversationList");
 const newBtn = document.getElementById("newConversationBtn");
 
 let state = JSON.parse(localStorage.getItem("cyntia-chat")) || {
@@ -15,6 +15,7 @@ function saveState() {
   localStorage.setItem("cyntia-chat", JSON.stringify(state));
 }
 
+/* CONVERSATIONS */
 function createConversation() {
   const id = "conv-" + Date.now();
   state.conversations[id] = {
@@ -28,16 +29,24 @@ function createConversation() {
 }
 
 function renderConversations() {
-  select.innerHTML = "";
+  list.innerHTML = "";
   Object.entries(state.conversations).forEach(([id, conv]) => {
-    const opt = document.createElement("option");
-    opt.value = id;
-    opt.textContent = conv.title;
-    if (id === state.active) opt.selected = true;
-    select.appendChild(opt);
+    const li = document.createElement("li");
+    li.textContent = conv.title;
+    if (id === state.active) li.classList.add("active");
+
+    li.onclick = () => {
+      state.active = id;
+      saveState();
+      renderConversations();
+      renderMessages();
+    };
+
+    list.appendChild(li);
   });
 }
 
+/* MESSAGES */
 function renderMessages() {
   messagesDiv.innerHTML = "";
   const conv = state.conversations[state.active];
@@ -65,6 +74,7 @@ function addBotMessage(text) {
   img.src = "assets/avatar.png";
 
   const span = document.createElement("span");
+
   div.appendChild(img);
   div.appendChild(span);
   messagesDiv.appendChild(div);
@@ -78,42 +88,51 @@ function addBotMessage(text) {
   }, 20);
 }
 
+/* SEND */
 form.addEventListener("submit", async e => {
   e.preventDefault();
   const text = input.value.trim();
   if (!text) return;
 
   const conv = state.conversations[state.active];
+
   addMessage(text, "user");
   conv.memory.push({ role: "user", content: text });
   input.value = "";
+
+  if (conv.memory.length === 1) {
+    conv.title = text.slice(0, 30);
+    renderConversations();
+  }
 
   const res = await fetch(webhookUrl, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       message: text,
-      memory: conv.memory
+      memory: conv.memory.slice(-6)
     })
   });
 
   const data = await res.json();
-  conv.memory = data.memory || conv.memory;
-  addBotMessage(data.reply || "Sin respuesta.");
+
+  if (data.reply) {
+    conv.memory.push({ role: "assistant", content: data.reply });
+    addBotMessage(data.reply);
+  } else {
+    addBotMessage("No se recibió respuesta del agente.");
+  }
+
   saveState();
 });
-
-select.addEventListener("change", () => {
-  state.active = select.value;
-  saveState();
-  renderMessages();
-});
-
-newBtn.addEventListener("click", createConversation);
 
 /* INIT */
-if (!state.active) createConversation();
-else {
+if (!state.conversations || Object.keys(state.conversations).length === 0) {
+  createConversation();
+} else {
+  state.active ||= Object.keys(state.conversations)[0];
   renderConversations();
   renderMessages();
 }
+
+newBtn.addEventListener("click", createConversation);

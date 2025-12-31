@@ -2,46 +2,47 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>CyntIA – Chat</title>
+  <title>CyntIA V1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<div class="chat-container">
+<div class="layout">
 
-  <!-- HEADER -->
-  <header class="chat-header">
-    <div class="header-left">
-      <img src="assets/avatar.png" alt="CyntIA" class="avatar">
-      <div>
-        <h1>CyntIA</h1>
-        <span class="subtitle">Asistente virtual</span>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <button id="newConversationBtn">＋ Nueva</button>
+    <ul id="conversationList"></ul>
+  </aside>
+
+  <!-- CHAT -->
+  <main class="chat-container">
+
+    <header class="chat-header">
+      <div class="header-left">
+        <img src="assets/avatar.png" class="avatar" alt="CyntIA">
+        <div>
+          <h1>Cyntia</h1>
+          <span class="subtitle">Asistente virtual</span>
+        </div>
       </div>
-    </div>
+    </header>
 
-    <div class="header-right">
-      <select id="conversationSelect"></select>
-      <button id="newConversationBtn">＋</button>
-    </div>
-  </header>
+    <div id="messages"></div>
 
-  <!-- MESSAGES -->
-  <div id="messages"></div>
+    <form id="form" class="chat-input">
+      <input id="input" placeholder="Escribí un mensaje…" autocomplete="off" />
+      <button type="submit">Enviar</button>
+    </form>
 
-  <!-- INPUT -->
-  <form id="form" class="chat-input">
-    <input id="input" placeholder="Escribí un mensaje…" autocomplete="off" />
-    <button type="submit">Enviar</button>
-  </form>
+    <footer class="chat-footer">
+      Creado por <strong>Lalita635</strong> ·
+      <a href="http://bit.ly/45BE8TF" target="_blank">Web</a> ·
+      <a href="http://bit.ly/4fS0yUa" target="_blank">Colaborar</a>
+    </footer>
 
-  <!-- FOOTER -->
-  <footer class="chat-footer">
-    Creado por <strong>Lalita635</strong> ·
-    <a href="http://bit.ly/45BE8TF" target="_blank">Web</a> ·
-    <a href="http://bit.ly/4fS0yUa" target="_blank">Colaborar</a>
-  </footer>
-
+  </main>
 </div>
 
 <script src="app.js"></script>
