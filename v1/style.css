@@ -44,10 +44,7 @@ body {
 
 .overlay {
   position: fixed;
-  top: 56px; /* altura aproximada del header */
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: rgba(0, 0, 0, 0.4);
   display: none;
   z-index: 15;
@@ -182,7 +179,7 @@ body {
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
-    .home-link {
+  .home-link {
     font-size: 18px;
     padding: 6px;
   }
@@ -201,7 +198,7 @@ body {
     left: -260px;
     height: 100vh;
     width: 220px;
-    z-index: 10;
+    z-index: 30;
     transition: left 0.3s ease;
   }
 
@@ -211,6 +208,27 @@ body {
 
   .overlay.show {
     display: block;
+  }
+
+  .sidebar button {
+    padding: 14px;
+    font-size: 16px;
+    border-radius: 8px;
+    background: #0b5ed7;
+    color: white;
+    border: none;
+  }
+
+  .layout {
+    height: 100dvh;
+  }
+
+  .chat-container {
+    min-height: 0;
+  }
+
+  #messages {
+    min-height: 0;
   }
 
 }

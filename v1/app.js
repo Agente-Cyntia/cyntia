@@ -40,6 +40,10 @@ function renderConversations() {
       saveState();
       renderConversations();
       renderMessages();
+
+  sidebar.classList.remove("open");
+  overlay.classList.remove("show");
+
     };
 
     list.appendChild(li);
