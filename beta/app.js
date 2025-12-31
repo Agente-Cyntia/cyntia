@@ -11,7 +11,18 @@ const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 const darkModeBtn = document.getElementById("darkModeBtn");
 const exportBtn = document.getElementById("exportBtn");
+const renameBtn = document.getElementById("renameBtn");
+const deleteBtn = document.getElementById("deleteBtn");
 const typingIndicator = document.getElementById("typingIndicator");
+
+// Modales
+const renameModal = document.getElementById("renameModal");
+const deleteModal = document.getElementById("deleteModal");
+const renameInput = document.getElementById("renameInput");
+const renameCancelBtn = document.getElementById("renameCancelBtn");
+const renameConfirmBtn = document.getElementById("renameConfirmBtn");
+const deleteCancelBtn = document.getElementById("deleteCancelBtn");
+const deleteConfirmBtn = document.getElementById("deleteConfirmBtn");
 
 // State
 let state = JSON.parse(localStorage.getItem("cyntia-chat")) || {
@@ -216,6 +227,66 @@ exportBtn.addEventListener("click", () => {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
+});
+
+// ============= RENAME CONVERSATION =============
+renameBtn.addEventListener("click", () => {
+  const conv = state.conversations[state.active];
+  if (!conv) return;
+  
+  renameInput.value = conv.title;
+  renameModal.classList.remove("hidden");
+  renameInput.focus();
+  renameInput.select();
+});
+
+renameConfirmBtn.addEventListener("click", () => {
+  const newTitle = renameInput.value.trim();
+  if (newTitle && state.conversations[state.active]) {
+    state.conversations[state.active].title = newTitle;
+    saveState();
+    renderConversations();
+    renameModal.classList.add("hidden");
+  }
+});
+
+renameCancelBtn.addEventListener("click", () => {
+  renameModal.classList.add("hidden");
+});
+
+renameInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") renameConfirmBtn.click();
+  if (e.key === "Escape") renameCancelBtn.click();
+});
+
+// ============= DELETE CONVERSATION =============
+deleteBtn.addEventListener("click", () => {
+  if (!state.conversations[state.active]) return;
+  deleteModal.classList.remove("hidden");
+});
+
+deleteConfirmBtn.addEventListener("click", () => {
+  if (!state.conversations[state.active]) return;
+  
+  delete state.conversations[state.active];
+  
+  const remaining = Object.keys(state.conversations);
+  if (remaining.length > 0) {
+    state.active = remaining[0];
+  } else {
+    createConversation();
+    deleteModal.classList.add("hidden");
+    return;
+  }
+  
+  saveState();
+  renderConversations();
+  renderMessages();
+  deleteModal.classList.add("hidden");
+});
+
+deleteCancelBtn.addEventListener("click", () => {
+  deleteModal.classList.add("hidden");
 });
 
 // ============= SIDEBAR & MENU =============

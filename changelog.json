@@ -1,19 +1,20 @@
 {
-  "latest": "v2.0",
+  "latest": "v2.3",
   "versions": [
     {
       "version": "v2.0",
       "date": "2025-12-31",
       "status": "beta",
-      "url": "beta/",
+      "url": "v2/",
       "changes": [
-        "Modo oscuro (Dark Mode) completamente funcional",
-        "Streaming de Conversaciones",
-        "Exportar conversaciones en formato JSON",
-        "PWA instalable en dispositivos móviles",
-        "Interfaz mejorada",
-        "Mejor manejo de errores y reconexión",
-        "Optimización de rendimiento"
+        "🌙 Modo oscuro para una experiencia más cómoda",
+        "💬 Indicador de escritura mientras el bot responde",
+        "💾 Exporta tus conversaciones",
+        "✏️ Renombra el título de tus conversaciones",
+        "🗑️ Elimina conversaciones que no necesites",
+        "📱 Instalable como aplicación en tu móvil",
+        "✨ Interfaz flotante y moderna",
+        "⚡ Mejor rendimiento y estabilidad"
       ]
     },
     {
@@ -22,11 +23,11 @@
       "status": "stable",
       "url": "v1/",
       "changes": [
-        "Chat web con IA",
-        "Soporte para múltiples conversaciones",
-        "Persistencia en localStorage",
-        "Efecto de escritura del bot",
-        "Deploy inicial en GitHub Pages"
+        "💬 Chat con Inteligencia Artificial",
+        "🗂️ Múltiples conversaciones simultáneas",
+        "💾 Guarda automáticamente tus chats",
+        "⌨️ Efecto de escritura en tiempo real",
+        "🚀 Primera versión pública"
       ]
     }
   ]

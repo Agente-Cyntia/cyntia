@@ -34,7 +34,13 @@
     </div>
 
     <div class="sidebar-footer">
-      <button id="exportBtn" class="btn-export" title="Exportar conversación">
+      <button id="renameBtn" class="btn-action" title="Renombrar conversación">
+        ✏️ Renombrar
+      </button>
+      <button id="deleteBtn" class="btn-action btn-danger" title="Eliminar conversación">
+        🗑️ Eliminar
+      </button>
+      <button id="exportBtn" class="btn-action" title="Exportar conversación">
         💾 Exportar
       </button>
     </div>
@@ -55,7 +61,7 @@
       </div>
 
       <div class="header-right">
-        <a href="../" class="home-link" title="Volver al inicio">
+        <a href="../../" class="home-link" title="Volver al inicio">
           🏠 Home
         </a>
       </div>
@@ -83,13 +89,37 @@
     </form>
 
     <footer class="chat-footer">
-      <a href="../beta/" class="home-link">🧪 Versión Beta</a>
+      <a href="../../" class="home-link">🏠 Inicio</a> ·
+      <a href="../../beta/" class="home-link">🧪 Versión Beta</a>
       <br>
-      Creado por <strong>Lalita635</strong> ·
-      <a href="https://bit.ly/45BE8TF" target="_blank">Web</a> ·
+      Creado por <strong><a href="https://bit.ly/45BE8TF" target="_blank">Lalita635</a></strong> ·
       <a href="https://github.com/agente-cyntia/cyntia/issues" target="_blank">Reportar Error</a>
     </footer>
   </main>
+</div>
+
+<!-- Modal para renombrar -->
+<div id="renameModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Renombrar conversación</h2>
+    <input type="text" id="renameInput" placeholder="Nuevo título..." />
+    <div class="modal-buttons">
+      <button id="renameCancelBtn" class="btn-cancel">Cancelar</button>
+      <button id="renameConfirmBtn" class="btn-confirm">Guardar</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal para confirmar eliminación -->
+<div id="deleteModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>⚠️ Eliminar conversación</h2>
+    <p>¿Estás seguro de que quieres eliminar esta conversación? No se puede deshacer.</p>
+    <div class="modal-buttons">
+      <button id="deleteCancelBtn" class="btn-cancel">Cancelar</button>
+      <button id="deleteConfirmBtn" class="btn-confirm btn-danger">Eliminar</button>
+    </div>
+  </div>
 </div>
 
 <script>

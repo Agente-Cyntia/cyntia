@@ -171,16 +171,17 @@ body.dark-mode .sidebar li:hover {
   padding: 10px;
   border-top: 1px solid var(--light-border);
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 8px;
 }
 
 body.dark-mode .sidebar-footer {
   border-top-color: var(--dark-border);
 }
 
-.btn-export {
-  flex: 1;
-  padding: 10px 14px;
+.btn-action {
+  width: 100%;
+  padding: 10px 12px;
   background: var(--light-border);
   color: var(--light-text);
   border: none;
@@ -188,22 +189,32 @@ body.dark-mode .sidebar-footer {
   font-weight: 600;
   cursor: pointer;
   font-size: 13px;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-body.dark-mode .btn-export {
+body.dark-mode .btn-action {
   background: var(--dark-border);
   color: var(--dark-text);
 }
 
-.btn-export:hover {
+.btn-action:hover {
   background: var(--light-text);
   color: white;
 }
 
-body.dark-mode .btn-export:hover {
+body.dark-mode .btn-action:hover {
   background: var(--dark-text);
   color: var(--dark-bg);
+}
+
+.btn-action.btn-danger:hover {
+  background: #dc3545;
+  color: white;
+}
+
+body.dark-mode .btn-action.btn-danger:hover {
+  background: #dc3545;
+  color: white;
 }
 
 /* ============= CHAT CONTAINER ============= */
@@ -593,4 +604,130 @@ body.dark-mode .chat-footer a {
   .chat-footer {
     font-size: 10px;
   }
+}
+
+/* ============= MODALES ============= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: var(--light-bg-secondary);
+  border-radius: 12px;
+  padding: 30px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .modal-content {
+  background: var(--dark-bg-secondary);
+}
+
+.modal-content h2 {
+  margin: 0 0 15px 0;
+  color: var(--light-text);
+  font-size: 1.3rem;
+}
+
+body.dark-mode .modal-content h2 {
+  color: var(--dark-text);
+}
+
+.modal-content p {
+  margin: 0 0 20px 0;
+  color: var(--light-text-secondary);
+  font-size: 0.95rem;
+}
+
+body.dark-mode .modal-content p {
+  color: var(--dark-text-secondary);
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid var(--light-border);
+  border-radius: 6px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  background: var(--light-bg);
+  color: var(--light-text);
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+body.dark-mode .modal-content input {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-border);
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-cancel,
+.btn-confirm {
+  flex: 1;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-cancel {
+  background: var(--light-border);
+  color: var(--light-text);
+}
+
+body.dark-mode .btn-cancel {
+  background: var(--dark-border);
+  color: var(--dark-text);
+}
+
+.btn-cancel:hover {
+  background: var(--light-text);
+  color: white;
+}
+
+body.dark-mode .btn-cancel:hover {
+  background: var(--dark-text);
+  color: var(--dark-bg);
+}
+
+.btn-confirm {
+  background: var(--primary);
+  color: white;
+}
+
+.btn-confirm:hover {
+  background: var(--primary-dark);
+}
+
+.btn-confirm.btn-danger {
+  background: #dc3545;
+}
+
+.btn-confirm.btn-danger:hover {
+  background: #c82333;
 }
