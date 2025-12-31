@@ -5,9 +5,9 @@
       "version": "v1.0",
       "date": "2025-01-02",
       "status": "stable",
-      "url": "latest/",
+      "url": "v1/",
       "changes": [
-        "Chat web funcional conectado a n8n",
+        "Chat web con ia",
         "Soporte para múltiples conversaciones",
         "Persistencia en localStorage",
         "Efecto de escritura del bot",
