@@ -1,9 +1,24 @@
 {
-  "latest": "v1.3",
+  "latest": "v2.0",
   "versions": [
     {
+      "version": "v2.0",
+      "date": "2025-12-31",
+      "status": "beta",
+      "url": "latest/",
+      "changes": [
+        "Modo oscuro (Dark Mode) completamente funcional",
+        "Streaming de Conversaciones",
+        "Exportar conversaciones en formato JSON",
+        "PWA instalable en dispositivos móviles",
+        "Interfaz mejorada",
+        "Mejor manejo de errores y reconexión",
+        "Optimización de rendimiento"
+      ]
+    },
+    {
       "version": "v1.3",
-      "date": "2025-12-20",
+      "date": "2025-12-15",
       "status": "stable",
       "url": "v1/",
       "changes": [

@@ -1,7 +1,7 @@
 # 🤖 CyntIA – Web Chat
 
 CyntIA es una interfaz web de chat conectada a un agente de Inteligencia Artificial.
-La últiama versión corresponde a la **v1**, una implementación inicial pensada como base para futuras mejoras y escalabilidad.
+La últiama versión estable corresponde a la **v1**, una implementación inicial pensada como base para futuras mejoras y escalabilidad.
 
 🌐 **Web:**  
 https://agente-cyntia.github.io/cyntia/

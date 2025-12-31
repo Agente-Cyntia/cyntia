@@ -2,64 +2,104 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>CyntIA V1</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b5ed7" />
+  <meta name="description" content="CyntIA v2 - Asistente Virtual IA con modo oscuro, PWA y más" />
+  
+  <title>CyntIA V2</title>
+  
   <link rel="stylesheet" href="style.css" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="assets/icon-512.png" />
+  <link rel="apple-touch-icon" href="assets/icon-192.png" />
 </head>
 <body>
 
-
-
 <div class="layout">
+  <!-- OVERLAY -->
+  <div class="overlay" id="overlay"></div>
 
   <!-- SIDEBAR -->
-   <div class="overlay" id="overlay"></div>
   <aside class="sidebar" id="sidebar">
-    <button id="newConversationBtn">＋ Nueva</button>
-    <ul id="conversationList"></ul>
+    <div class="sidebar-header">
+      <button id="darkModeBtn" class="dark-mode-btn" title="Alternar modo oscuro">
+        🌙
+      </button>
+    </div>
+    
+    <div class="sidebar-content">
+      <button id="newConversationBtn" class="btn-new-conversation">➕ Nueva</button>
+      <ul id="conversationList"></ul>
+    </div>
+
+    <div class="sidebar-footer">
+      <button id="exportBtn" class="btn-export" title="Exportar conversación">
+        💾 Exportar
+      </button>
+    </div>
   </aside>
 
-  <!-- CHAT -->
+  <!-- CHAT CONTAINER -->
   <main class="chat-container">
-
     <header class="chat-header">
-  <div class="header-left">
-    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
-      ☰
-    </button>
+      <div class="header-left">
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
+          ☰
+        </button>
+        <img src="assets/avatar.png" class="avatar" alt="CyntIA" />
+        <div>
+          <h1>CyntIA</h1>
+          <span class="subtitle">v2.0 - Beta</span>
+        </div>
+      </div>
 
-    <img src="assets/avatar.png" class="avatar" alt="CyntIA">
-    <div>
-      <h1>CyntIA</h1>
-      <span class="subtitle">Asistente virtual v1</span>
+      <div class="header-right">
+        <a href="../" class="home-link" title="Volver al inicio">
+          🏠 Home
+        </a>
+      </div>
+    </header>
+
+    <div id="messages" class="messages"></div>
+
+    <div id="typingIndicator" class="typing-indicator hidden">
+      <img src="assets/avatar.png" alt="CyntIA" />
+      <div class="typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
     </div>
-  </div>
-
-  <div class="header-right">
-    <a href="../" class="home-link" title="Volver al inicio">
-      🏠 Home
-    </a>
-  </div>
-</header>
-
-    <div id="messages"></div>
 
     <form id="form" class="chat-input">
-      <input id="input" placeholder="Escribí un mensaje…" autocomplete="off" />
-      <button type="submit">Enviar</button>
+      <input 
+        id="input" 
+        placeholder="Escribe un mensaje…" 
+        autocomplete="off" 
+        disabled
+      />
+      <button type="submit" disabled>Enviar</button>
     </form>
 
     <footer class="chat-footer">
-      <a href="../latest/" class="home-link">🚀 Última versión</a>
+      <a href="../beta/" class="home-link">🧪 Versión Beta</a>
       <br>
       Creado por <strong>Lalita635</strong> ·
-      <a href="http://bit.ly/45BE8TF" target="_blank">Web</a> ·
-      <a href="http://bit.ly/4fS0yUa" target="_blank">Colaborar</a>
+      <a href="https://bit.ly/45BE8TF" target="_blank">Web</a> ·
+      <a href="https://github.com/agente-cyntia/cyntia/issues" target="_blank">Reportar Error</a>
     </footer>
-
   </main>
 </div>
 
+<script>
+  // Registrar Service Worker para PWA
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(err => {
+      console.log('Service Worker no registrado:', err);
+    });
+  }
+</script>
 <script src="app.js"></script>
 </body>
 </html>
