@@ -230,42 +230,63 @@ exportBtn.addEventListener("click", () => {
 });
 
 // ============= RENAME CONVERSATION =============
-renameBtn.addEventListener("click", () => {
+renameBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   const conv = state.conversations[state.active];
   if (!conv) return;
   
   renameInput.value = conv.title;
   renameModal.classList.remove("hidden");
-  renameInput.focus();
-  renameInput.select();
+  setTimeout(() => {
+    renameInput.focus();
+    renameInput.select();
+  }, 100);
 });
 
-renameConfirmBtn.addEventListener("click", () => {
+renameConfirmBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   const newTitle = renameInput.value.trim();
   if (newTitle && state.conversations[state.active]) {
     state.conversations[state.active].title = newTitle;
     saveState();
     renderConversations();
+    renderMessages();
     renameModal.classList.add("hidden");
+    renameInput.value = "";
   }
 });
 
-renameCancelBtn.addEventListener("click", () => {
+renameCancelBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   renameModal.classList.add("hidden");
+  renameInput.value = "";
 });
 
 renameInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") renameConfirmBtn.click();
-  if (e.key === "Escape") renameCancelBtn.click();
+  if (e.key === "Enter") {
+    e.preventDefault();
+    renameConfirmBtn.click();
+  }
+  if (e.key === "Escape") {
+    e.preventDefault();
+    renameCancelBtn.click();
+  }
 });
 
 // ============= DELETE CONVERSATION =============
-deleteBtn.addEventListener("click", () => {
+deleteBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   if (!state.conversations[state.active]) return;
   deleteModal.classList.remove("hidden");
 });
 
-deleteConfirmBtn.addEventListener("click", () => {
+deleteConfirmBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   if (!state.conversations[state.active]) return;
   
   delete state.conversations[state.active];
@@ -282,10 +303,13 @@ deleteConfirmBtn.addEventListener("click", () => {
   saveState();
   renderConversations();
   renderMessages();
+  enableInput();
   deleteModal.classList.add("hidden");
 });
 
-deleteCancelBtn.addEventListener("click", () => {
+deleteCancelBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  e.stopPropagation();
   deleteModal.classList.add("hidden");
 });
 

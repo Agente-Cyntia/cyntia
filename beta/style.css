@@ -614,11 +614,22 @@ body.dark-mode .chat-footer a {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 2000;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal.hidden {
-  display: none;
+  display: none !important;
 }
 
 .modal-content {
@@ -626,8 +637,22 @@ body.dark-mode .chat-footer a {
   border-radius: 12px;
   padding: 30px;
   max-width: 400px;
-  width: 90%;
+  width: 100%;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: slideUp 0.3s ease;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 body.dark-mode .modal-content {
@@ -705,12 +730,14 @@ body.dark-mode .btn-cancel {
   color: var(--dark-text);
 }
 
-.btn-cancel:hover {
+.btn-cancel:hover,
+.btn-cancel:active {
   background: var(--light-text);
   color: white;
 }
 
-body.dark-mode .btn-cancel:hover {
+body.dark-mode .btn-cancel:hover,
+body.dark-mode .btn-cancel:active {
   background: var(--dark-text);
   color: var(--dark-bg);
 }
@@ -720,7 +747,8 @@ body.dark-mode .btn-cancel:hover {
   color: white;
 }
 
-.btn-confirm:hover {
+.btn-confirm:hover,
+.btn-confirm:active {
   background: var(--primary-dark);
 }
 
@@ -728,6 +756,7 @@ body.dark-mode .btn-cancel:hover {
   background: #dc3545;
 }
 
-.btn-confirm.btn-danger:hover {
+.btn-confirm.btn-danger:hover,
+.btn-confirm.btn-danger:active {
   background: #c82333;
 }

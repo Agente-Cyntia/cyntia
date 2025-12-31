@@ -56,12 +56,12 @@
         <img src="assets/avatar.png" class="avatar" alt="CyntIA" />
         <div>
           <h1>CyntIA</h1>
-          <span class="subtitle">v2.0 - Beta</span>
+          <span class="subtitle">v2.3 - Beta</span>
         </div>
       </div>
 
       <div class="header-right">
-        <a href="../../" class="home-link" title="Volver al inicio">
+        <a href="../index.html" class="home-link" title="Volver al inicio">
           🏠 Home
         </a>
       </div>
@@ -89,11 +89,9 @@
     </form>
 
     <footer class="chat-footer">
-      <a href="../../" class="home-link">🏠 Inicio</a> ·
-      <a href="../../beta/" class="home-link">🧪 Versión Beta</a>
+      <a href="../index.html" class="home-link">🏠 Inicio</a> ·
       <br>
-      Creado por <strong><a href="https://bit.ly/45BE8TF" target="_blank">Lalita635</a></strong> ·
-      <a href="https://github.com/agente-cyntia/cyntia/issues" target="_blank">Reportar Error</a>
+      Creado por <strong><a href="https://bit.ly/45BE8TF" target="_blank">Lalita635</a></strong>·
     </footer>
   </main>
 </div>
@@ -123,6 +121,17 @@
 </div>
 
 <script>
+  // Detectar si la página está dentro de un iframe y ocultar el footer
+  if (window.self !== window.top) {
+    // Estamos dentro de un iframe
+    document.addEventListener('DOMContentLoaded', () => {
+      const footer = document.querySelector('.chat-footer');
+      if (footer) {
+        footer.style.display = 'none';
+      }
+    });
+  }
+  
   // Registrar Service Worker para PWA
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('sw.js').catch(err => {
