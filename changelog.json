@@ -5,7 +5,7 @@
       "version": "v3.0",
       "date": "2026-01-01",
       "status": "beta",
-      "url": "v3.html",
+      "url": "v3/",
       "changes": [
         "🎭 Múltiples personalidades especializadas (Profesor, Chef, Coach, Tutor, y más)",
         "🔄 Cambio dinámico de contexto entre personalidades",

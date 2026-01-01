@@ -1,4 +1,4 @@
-const webhookUrl = "https://n8n-free-fzir.onrender.com/webhook/multi-agent-chat";
+const webhookUrl = "https://n8n-free-fzir.onrender.com/webhook/multi-personality-chat";
 
 // Definición de personalidades
 const PERSONALITIES = {
